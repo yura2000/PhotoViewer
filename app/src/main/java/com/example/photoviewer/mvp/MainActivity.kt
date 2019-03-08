@@ -85,6 +85,6 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showApiError(resId: String?) {
-        Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, resId, Toast.LENGTH_LONG).show()
     }
 }
