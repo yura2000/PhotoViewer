@@ -9,9 +9,13 @@ interface MainView {
 
     fun showAlbums(albums: List<Album>)
 
-    fun showPhotos(photos: List<Photo>)
+    fun showPhotoTitles(photos: List<Photo>)
+
+    fun showPhoto(photoUrl: String?)
 
     fun setAlbumIdForPhotos(albumId: Int)
+
+    fun setPhotosIdForPhoto(photoId: Int)
 
     fun showApiError(resId: String?)
 }

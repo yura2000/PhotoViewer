@@ -57,7 +57,36 @@ class MainPresenter(private val view: MainView, private val service: MainService
             override fun onResponse(call: Call<List<Photo>>, response: Response<List<Photo>>) {
                 photos = response.body()
 
-                view.showPhotos(photos!!)
+                view.showPhotoTitles(photos!!)
+            }
+
+            override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
+                view.showApiError(t.message)
+            }
+        })
+    }
+
+    fun setPhotosIdForPhoto(photoId: Int) {
+        view.setPhotosIdForPhoto(photoId)
+    }
+
+    fun getPhoto(photoId: Int) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://jsonplaceholder.typicode.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
+
+        val call = jsonPlaceHolderApi.photo(photoId + 1)
+
+        call.enqueue(object : Callback<List<Photo>> {
+            override fun onResponse(call: Call<List<Photo>>, response: Response<List<Photo>>) {
+                val photo: List<Photo>? = response.body()
+
+                for (photoUrl in photo!!) {
+                    view.showPhoto(photoUrl.url)
+                }
             }
 
             override fun onFailure(call: Call<List<Photo>>, t: Throwable) {

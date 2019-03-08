@@ -18,7 +18,7 @@ class PhotoViewHolder(itemView: View, presenter: MainPresenter?) : RecyclerView.
     }
 
     override fun onClick(v: View?) {
-   //     presenter?.getPhotosList(adapterPosition)
+        presenter?.setPhotosIdForPhoto(adapterPosition)
     }
 
     fun bind(photo: Photo) {

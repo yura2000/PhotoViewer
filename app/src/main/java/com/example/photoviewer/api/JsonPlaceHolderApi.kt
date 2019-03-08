@@ -11,4 +11,7 @@ interface JsonPlaceHolderApi {
 
     @GET("photos")
     fun photos(@Query("albumId") userId: Int?): Call<List<Photo>>
+
+    @GET("photos")
+    fun photo(@Query("id") userId: Int?): Call<List<Photo>>
 }
