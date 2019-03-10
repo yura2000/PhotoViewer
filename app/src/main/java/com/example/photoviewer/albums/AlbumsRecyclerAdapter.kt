@@ -3,21 +3,21 @@ package com.example.photoviewer.albums
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.photoviewer.api.Album
+import com.example.photoviewer.data.Album
 import com.example.photoviewer.main.MainPresenter
 
 
-class AlbumRecyclerAdapter(private val values: List<Album>, private val presenter: MainPresenter?) : RecyclerView.Adapter<AlbumViewHolder>() {
+class AlbumsRecyclerAdapter(private val values: List<Album>) : RecyclerView.Adapter<AlbumsViewHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): AlbumViewHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): AlbumsViewHolder {
         val itemView = LayoutInflater.from(p0.context).inflate(com.example.photoviewer.R.layout.item_title, p0, false)
-        return AlbumViewHolder(itemView, presenter)
+        return AlbumsViewHolder(itemView)
     }
 
     override fun getItemCount() = values.size
 
-    override fun onBindViewHolder(holderAlbum: AlbumViewHolder, pos: Int) {
+    override fun onBindViewHolder(holderAlbums: AlbumsViewHolder, pos: Int) {
         val album: Album = values[pos]
-        holderAlbum.bind(album)
+        holderAlbums.bind(album)
     }
 }
