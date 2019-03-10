@@ -1,10 +1,10 @@
-package com.example.photoviewer.adapter
+package com.example.photoviewer.albums
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.photoviewer.api.Album
-import com.example.photoviewer.mvp.MainPresenter
+import com.example.photoviewer.main.MainPresenter
 
 
 class AlbumRecyclerAdapter(private val values: List<Album>, private val presenter: MainPresenter?) : RecyclerView.Adapter<AlbumViewHolder>() {

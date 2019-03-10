@@ -1,10 +1,10 @@
-package com.example.photoviewer.adapter
+package com.example.photoviewer.albums
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.example.photoviewer.api.Album
-import com.example.photoviewer.mvp.MainPresenter
+import com.example.photoviewer.main.MainPresenter
 
 class AlbumViewHolder(itemView: View, presenter: MainPresenter?) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
     var albumTitle: TextView? = null

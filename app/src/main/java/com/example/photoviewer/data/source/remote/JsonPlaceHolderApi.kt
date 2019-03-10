@@ -1,5 +1,7 @@
-package com.example.photoviewer.api
+package com.example.photoviewer.data.source.remote
 
+import com.example.photoviewer.data.Album
+import com.example.photoviewer.data.Photo
 import retrofit2.http.GET
 import retrofit2.Call;
 import retrofit2.http.Query

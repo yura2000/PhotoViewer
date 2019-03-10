@@ -1,10 +1,10 @@
-package com.example.photoviewer.api
+package com.example.photoviewer.data
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-class Photo {
+class Photo{
 
     @SerializedName("albumId")
     @Expose
