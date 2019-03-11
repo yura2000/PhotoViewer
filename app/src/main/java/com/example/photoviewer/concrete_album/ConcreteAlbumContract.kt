@@ -9,6 +9,8 @@ interface ConcreteAlbumContract {
 
         fun setPresenter(presenter: ConcreteAlbumContract.Presenter)
 
+        fun showPhotoActivity(photoId: Int?)
+
     }
 
     interface Presenter : BaseContact {
@@ -16,6 +18,7 @@ interface ConcreteAlbumContract {
 
         fun getPhotos()
 
+        fun onConcreteAlbumSelected(photo: Photo?)
     }
 
 }

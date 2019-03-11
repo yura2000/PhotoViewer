@@ -1,6 +1,5 @@
 package com.example.photoviewer.data.source.remote
 
-import com.example.photoviewer.concrete_album.ConcreteAlbumContract
 import com.example.photoviewer.data.Photo
 import com.example.photoviewer.data.source.PhotoDataSource
 import com.example.photoviewer.photo.PhotoContract
@@ -14,7 +13,7 @@ class PhotoRemoteDataSource: PhotoDataSource {
 
     private var mPresenter: PhotoContract.Presenter? = null
 
-    override fun getPhoto(photoId: Int) {
+    override fun getPhoto(photoId: Int?) {
         val retrofit = Retrofit.Builder()
             .baseUrl("http://jsonplaceholder.typicode.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -22,7 +21,7 @@ class PhotoRemoteDataSource: PhotoDataSource {
 
         val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
 
-        val call = jsonPlaceHolderApi.photo(photoId + 1)
+        val call = jsonPlaceHolderApi.photo(photoId)
 
         call.enqueue(object : Callback<List<Photo>> {
             override fun onResponse(call: Call<List<Photo>>, response: Response<List<Photo>>) {

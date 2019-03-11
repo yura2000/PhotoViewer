@@ -1,16 +1,16 @@
 package com.example.photoviewer.concrete_album
 
-import com.example.photoviewer.albums.AlbumsContract
 import com.example.photoviewer.data.Photo
-import com.example.photoviewer.data.source.AlbumsDataSource
 import com.example.photoviewer.data.source.PhotosDataSource
-import com.example.photoviewer.data.source.remote.PhotosRemoteDataSource
 
-class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, concreteAlbumData: PhotosDataSource) : ConcreteAlbumContract.Presenter {
+class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, concreteAlbumData: PhotosDataSource, albumId: Int?)
+    : ConcreteAlbumContract.Presenter {
 
     private var mPhotosRemoteDataSource: PhotosDataSource? = null
 
     private var mConcreteAlbumView: ConcreteAlbumContract.View? = null
+
+    private var albumsId: Int? = albumId
 
     init {
         mConcreteAlbumView = concreteAlbumView
@@ -25,10 +25,14 @@ class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, conc
     }
 
     override fun getPhotos() {
-        mPhotosRemoteDataSource?.getPhotos(1) //albumId here!!1
+        mPhotosRemoteDataSource?.getPhotos(albumsId)
     }
 
     override fun showLoadError(resId: String?) {
         mConcreteAlbumView?.showLoadError(resId)
+    }
+
+    override fun onConcreteAlbumSelected(photo: Photo?) {
+        mConcreteAlbumView?.showPhotoActivity(photo?.id)
     }
 }

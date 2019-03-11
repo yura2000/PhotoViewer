@@ -1,5 +1,6 @@
 package com.example.photoviewer.albums
 
+import android.view.View
 import com.example.photoviewer.BaseContact
 import com.example.photoviewer.data.Album
 
@@ -9,6 +10,7 @@ interface AlbumsContract {
 
         fun setPresenter(presenter: AlbumsContract.Presenter)
 
+        fun showConcreteAlbumActivity(pos: Int?)
     }
 
     interface Presenter : BaseContact {
@@ -16,6 +18,7 @@ interface AlbumsContract {
 
         fun getAlbums()
 
+        fun onAlbumSelected(album: Album?)
     }
 
 }

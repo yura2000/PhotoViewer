@@ -25,6 +25,10 @@ class PhotoActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
 
-        val presenter = PhotoPresenter(fragment, repository)
+        val id = intent.getStringExtra("PHOTO_ID")
+
+        val photoId: Int? = id?.toInt()
+
+        val presenter = PhotoPresenter(fragment, repository, photoId)
     }
 }

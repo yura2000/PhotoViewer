@@ -21,6 +21,10 @@ class ConcreteAlbumActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
 
-        val presenter = ConcreteAlbumPresenter(fragment, repository)
+        val pos = intent.getStringExtra("ALBUM_ID")
+
+        val albumId: Int? = pos?.toInt()
+
+        val presenter = ConcreteAlbumPresenter(fragment, repository, albumId)
     }
 }
