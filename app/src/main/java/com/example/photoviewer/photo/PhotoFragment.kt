@@ -19,7 +19,12 @@ class PhotoFragment : Fragment(), PhotoContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter?.getPhotos()
+
+        val args = arguments
+
+        val photoId: Int? = args?.getInt("PHOTO_ID", 0)
+
+        mPresenter?.getPhotos(photoId)
     }
 
     override fun onCreateView(

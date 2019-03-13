@@ -3,14 +3,12 @@ package com.example.photoviewer.concrete_album
 import com.example.photoviewer.data.Photo
 import com.example.photoviewer.data.source.PhotosDataSource
 
-class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, concreteAlbumData: PhotosDataSource, albumId: Int?)
+class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, concreteAlbumData: PhotosDataSource)
     : ConcreteAlbumContract.Presenter {
 
     private var mPhotosRemoteDataSource: PhotosDataSource? = null
 
     private var mConcreteAlbumView: ConcreteAlbumContract.View? = null
-
-    private var albumsId: Int? = albumId
 
     init {
         mConcreteAlbumView = concreteAlbumView
@@ -24,8 +22,8 @@ class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, conc
         mConcreteAlbumView?.showPhotos(photos)
     }
 
-    override fun getPhotos() {
-        mPhotosRemoteDataSource?.getPhotos(albumsId)
+    override fun getPhotos(albumId: Int?) {
+        mPhotosRemoteDataSource?.getPhotos(albumId)
     }
 
     override fun showLoadError(resId: String?) {

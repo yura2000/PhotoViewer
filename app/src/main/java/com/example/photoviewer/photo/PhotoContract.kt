@@ -15,7 +15,7 @@ interface PhotoContract {
     interface Presenter : BaseContact {
         fun loadPhoto(photoUrl: String?)
 
-        fun getPhotos()
+        fun getPhotos(photoId: Int?)
 
     }
 

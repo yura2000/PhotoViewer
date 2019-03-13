@@ -16,7 +16,7 @@ interface ConcreteAlbumContract {
     interface Presenter : BaseContact {
         fun loadPhotos(photos: List<Photo>?)
 
-        fun getPhotos()
+        fun getPhotos(albumId: Int?)
 
         fun onConcreteAlbumSelected(photo: Photo?)
     }

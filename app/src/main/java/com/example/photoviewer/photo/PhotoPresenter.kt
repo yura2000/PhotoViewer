@@ -2,15 +2,13 @@ package com.example.photoviewer.photo
 
 import com.example.photoviewer.data.source.PhotoDataSource
 
-class PhotoPresenter(photoView: PhotoContract.View, photoData: PhotoDataSource, id: Int?): PhotoContract.Presenter {
+class PhotoPresenter(photoView: PhotoContract.View, photoData: PhotoDataSource) : PhotoContract.Presenter {
 
     private var mPhotoRemoteDataSource: PhotoDataSource? = null
 
     private var mPhotoView: PhotoContract.View? = null
 
     private val TAG = "MyActivity"
-
-    private val photoId: Int? = id
 
     init {
         mPhotoView = photoView
@@ -25,7 +23,7 @@ class PhotoPresenter(photoView: PhotoContract.View, photoData: PhotoDataSource, 
         mPhotoView?.showPhoto(photoUrl)
     }
 
-    override fun getPhotos() {
+    override fun getPhotos(photoId: Int?) {
         mPhotoRemoteDataSource?.getPhoto(photoId) //photoId here !!1
     }
 

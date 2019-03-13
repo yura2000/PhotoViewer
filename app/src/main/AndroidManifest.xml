@@ -13,11 +13,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".albums.AlbumsActivity">
+        </activity>
         <activity android:name=".photo.PhotoActivity">
         </activity>
         <activity android:name=".concrete_album.ConcreteAlbumActivity">
         </activity>
-        <activity android:name=".albums.AlbumsActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

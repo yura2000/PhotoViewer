@@ -1,14 +1,14 @@
-package com.example.photoviewer.concrete_album
+package com.example.photoviewer.concrete_album.adapter
 
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.example.photoviewer.R
-import com.example.photoviewer.data.Album
+import com.example.photoviewer.concrete_album.ConcreteAlbumClickListener
 import com.example.photoviewer.data.Photo
 
-class ConcreteAlbumViewHolder(itemView: View, val onClickItem: ((view: View, item: Photo) -> Unit)?) : RecyclerView.ViewHolder(itemView) {
+class ConcreteAlbumViewHolder(itemView: View, val onClickItem: ConcreteAlbumClickListener?) : RecyclerView.ViewHolder(itemView) {
     var photoTitle: TextView? = null
     var photoId: TextView? = null
     var containItem: ConstraintLayout? = null
@@ -23,7 +23,7 @@ class ConcreteAlbumViewHolder(itemView: View, val onClickItem: ((view: View, ite
         photoTitle?.text = photo.title
         photoId?.text = photo.id.toString()
         containItem?.setOnClickListener{ v ->
-            onClickItem?.invoke(v, photo)
+            onClickItem?.onConcreteAlbumClicked(v, photo)
         }
     }
 }
