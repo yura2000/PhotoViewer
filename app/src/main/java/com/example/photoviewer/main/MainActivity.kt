@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), MainScreenContract.View, ConcreteAlbum
 
         supportFragmentManager
             .beginTransaction()
-            .add(com.example.photoviewer.R.id.main_frag, fragment)
+            .replace(com.example.photoviewer.R.id.main_frag, fragment)
             .commit()
 
         val presenter = AlbumsPresenter(fragment, repository)

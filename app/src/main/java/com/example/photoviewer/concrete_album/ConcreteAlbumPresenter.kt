@@ -29,8 +29,4 @@ class ConcreteAlbumPresenter(concreteAlbumView: ConcreteAlbumContract.View, conc
     override fun showLoadError(resId: String?) {
         mConcreteAlbumView?.showLoadError(resId)
     }
-
-    override fun onConcreteAlbumSelected(photo: Photo?) {
-        mConcreteAlbumView?.showPhotoActivity(photo?.id)
-    }
 }

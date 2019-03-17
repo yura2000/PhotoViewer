@@ -8,17 +8,12 @@ interface ConcreteAlbumContract {
         fun showPhotos(photos: List<Photo>?)
 
         fun setPresenter(presenter: ConcreteAlbumContract.Presenter)
-
-        fun showPhotoActivity(photoId: Int?)
-
     }
 
     interface Presenter : BaseContact {
         fun loadPhotos(photos: List<Photo>?)
 
         fun getPhotos(albumId: Int?)
-
-        fun onConcreteAlbumSelected(photo: Photo?)
     }
 
 }

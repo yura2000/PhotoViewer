@@ -9,7 +9,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class PhotosRemoteDataSource: PhotosDataSource {
+class PhotosRemoteDataSource : PhotosDataSource {
 
     private var mPresenter: ConcreteAlbumContract.Presenter? = null
 
@@ -30,16 +30,15 @@ class PhotosRemoteDataSource: PhotosDataSource {
                 photos = response.body()
 
                 mPresenter?.loadPhotos(photos)
-
             }
 
             override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
                 mPresenter?.showLoadError(t.message)
             }
-        })    }
+        })
+    }
 
     override fun setPresenter(presenter: ConcreteAlbumContract.Presenter) {
         mPresenter = presenter
     }
-
 }

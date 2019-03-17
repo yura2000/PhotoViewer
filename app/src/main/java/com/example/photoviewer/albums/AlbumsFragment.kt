@@ -17,27 +17,24 @@ import kotlinx.android.synthetic.main.albums_fragment.*
 class AlbumsFragment : Fragment(), AlbumsContract.View {
 
     private var mPresenter: AlbumsContract.Presenter? = null
-
     private lateinit var callback: AlbumsClickListener
-
-    private val TAG = "myLogs"
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         callback = context as AlbumsClickListener
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mPresenter?.getAlbums()
     }
 
     override fun setPresenter(presenter: AlbumsContract.Presenter) {
         mPresenter = presenter
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mPresenter?.getAlbums()
     }
 
     override fun onCreateView(
@@ -46,10 +43,6 @@ class AlbumsFragment : Fragment(), AlbumsContract.View {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.albums_fragment, container, false)
-    }
-
-    override fun showConcreteAlbumActivity(pos: Int?) {
-
     }
 
     override fun showAlbums(albums: List<Album>?) {
@@ -62,7 +55,6 @@ class AlbumsFragment : Fragment(), AlbumsContract.View {
         val recyclerViewAlbums = albums_recycler_view
         recyclerViewAlbums?.layoutManager = LinearLayoutManager(context)
         recyclerViewAlbums?.adapter = albumsRecyclerView
-
     }
 
     override fun showLoadError(resId: String?) {

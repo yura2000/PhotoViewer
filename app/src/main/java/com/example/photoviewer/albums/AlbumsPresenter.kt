@@ -24,10 +24,6 @@ class AlbumsPresenter(albumsView: AlbumsContract.View, albumsData: AlbumsDataSou
         mAlbumsView?.showAlbums(albums)
     }
 
-    override fun onAlbumSelected(album: Album?) {
-        mAlbumsView?.showConcreteAlbumActivity(album?.id)
-    }
-
     override fun getAlbums() {
         mAlbumsRemoteDataSource?.getAlbums()
     }

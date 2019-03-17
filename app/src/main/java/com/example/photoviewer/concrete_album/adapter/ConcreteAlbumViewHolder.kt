@@ -8,7 +8,7 @@ import com.example.photoviewer.R
 import com.example.photoviewer.concrete_album.ConcreteAlbumClickListener
 import com.example.photoviewer.data.Photo
 
-class ConcreteAlbumViewHolder(itemView: View, val onClickItem: ConcreteAlbumClickListener?) : RecyclerView.ViewHolder(itemView) {
+class ConcreteAlbumViewHolder(itemView: View, private val onClickItem: ConcreteAlbumClickListener?) : RecyclerView.ViewHolder(itemView) {
     var photoTitle: TextView? = null
     var photoId: TextView? = null
     var containItem: ConstraintLayout? = null

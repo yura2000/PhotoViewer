@@ -19,12 +19,6 @@ class PhotoFragment : Fragment(), PhotoContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val args = arguments
-
-        val photoId: Int? = args?.getInt("PHOTO_ID", 0)
-
-        mPresenter?.getPhotos(photoId)
     }
 
     override fun onCreateView(
@@ -33,6 +27,15 @@ class PhotoFragment : Fragment(), PhotoContract.View {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.photo_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val args = arguments
+        val photoId: Int? = args?.getInt("PHOTO_ID", 0)
+
+        mPresenter?.getPhotos(photoId)
     }
 
     override fun showPhoto(photoUrl: String?) {

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 
-import com.example.photoviewer.R
 import com.example.photoviewer.concrete_album.adapter.ConcreteAlbumRecyclerAdapter
 import com.example.photoviewer.data.Photo
 import kotlinx.android.synthetic.main.concrete_album_fragment.*
@@ -17,23 +16,17 @@ import kotlinx.android.synthetic.main.concrete_album_fragment.*
 class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
 
     private var mPresenter: ConcreteAlbumContract.Presenter? = null
-
     private lateinit var callback: ConcreteAlbumClickListener
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //val pos = intent.getStringExtra("ALBUM_ID")
-        val args = arguments
-
-        val albumId: Int? = args?.getInt("ALBUM_ID", 0)
-
-        mPresenter?.getPhotos(albumId)
-    }
+    val args = arguments
+    val albumId: Int? = args?.getInt("ALBUM_ID", 0)
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         callback = context as ConcreteAlbumClickListener
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -41,11 +34,17 @@ class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.concrete_album_fragment, container, false)
+        return inflater.inflate(com.example.photoviewer.R.layout.concrete_album_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mPresenter?.getPhotos(albumId)
     }
 
     override fun showPhotos(photos: List<Photo>?) {
-        val photosRecyclerView = ConcreteAlbumRecyclerAdapter(photos!!)
+        var photosRecyclerView = ConcreteAlbumRecyclerAdapter(photos!!)
         photosRecyclerView.onClickItem = (object : ConcreteAlbumClickListener {
             override fun onConcreteAlbumClicked(view: View, item: Photo) {
                 callback.onConcreteAlbumClicked(view, item)
@@ -58,11 +57,6 @@ class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
 
     override fun setPresenter(presenter: ConcreteAlbumContract.Presenter) {
         mPresenter = presenter
-    }
-
-    override fun showPhotoActivity(photoId: Int?) {
-
-        //startActivity(intent)
     }
 
     override fun showLoadError(resId: String?) {
