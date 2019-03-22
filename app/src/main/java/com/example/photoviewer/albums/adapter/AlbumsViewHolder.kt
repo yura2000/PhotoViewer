@@ -8,7 +8,9 @@ import com.example.photoviewer.R
 import com.example.photoviewer.albums.AlbumsClickListener
 import com.example.photoviewer.data.Album
 
-class AlbumsViewHolder(itemView: View, private val onClickItem: AlbumsClickListener?) : RecyclerView.ViewHolder(itemView) {
+class AlbumsViewHolder(itemView: View, private val onClickItem: AlbumsClickListener?) :
+    RecyclerView.ViewHolder(itemView) {
+
     var albumTitle: TextView? = null
     var albumId: TextView? = null
     var containItem: ConstraintLayout? = null
@@ -22,8 +24,8 @@ class AlbumsViewHolder(itemView: View, private val onClickItem: AlbumsClickListe
     fun bind(album: Album) {
         albumTitle?.text = album.title
         albumId?.text = album.id.toString()
-        containItem?.setOnClickListener{ v ->
-            onClickItem?.onAlbumsClicked(v, album)
+        containItem?.setOnClickListener {
+            onClickItem?.onAlbumsClicked(album)
         }
     }
 }

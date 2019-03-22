@@ -4,5 +4,5 @@ import android.view.View
 import com.example.photoviewer.data.Album
 
 interface AlbumsClickListener{
-    fun onAlbumsClicked(view: View, item: Album)
+    fun onAlbumsClicked(item: Album)
 }

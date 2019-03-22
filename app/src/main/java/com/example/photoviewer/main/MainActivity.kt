@@ -2,7 +2,7 @@ package com.example.photoviewer.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import com.example.photoviewer.R
 import com.example.photoviewer.albums.AlbumsClickListener
 import com.example.photoviewer.albums.AlbumsFragment
@@ -20,62 +20,71 @@ import com.example.photoviewer.photo.PhotoPresenter
 
 class MainActivity : AppCompatActivity(), MainScreenContract.View, ConcreteAlbumClickListener, AlbumsClickListener {
 
+    private val albumFragment = AlbumsFragment()
+    private val concreteAlbumFragment = ConcreteAlbumFragment()
+    private val photoFragment = PhotoFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(com.example.photoviewer.R.layout.main_activity)
         startAlbumsFragment()
     }
 
     override fun startAlbumsFragment() {
-        val fragment = AlbumsFragment()
 
         val repository = AlbumsRemoteDataSource()
 
         supportFragmentManager
             .beginTransaction()
-            .replace(com.example.photoviewer.R.id.main_frag, fragment)
+            .add(com.example.photoviewer.R.id.main_frag, albumFragment)
             .commit()
 
-        val presenter = AlbumsPresenter(fragment, repository)
+        val presenter = AlbumsPresenter(albumFragment, repository)
     }
 
-    override fun startConcreteAlbumFragment() {
-        val fragment = ConcreteAlbumFragment()
+    override fun startConcreteAlbumFragment(itemId: Int) {
+        val arg = Bundle()
+        arg.putInt("ID", itemId)
+
+        concreteAlbumFragment.arguments = arg
 
         val repository = PhotosRemoteDataSource()
 
         supportFragmentManager
             .beginTransaction()
-            .replace(com.example.photoviewer.R.id.main_frag, fragment)
+            .add(com.example.photoviewer.R.id.main_frag, concreteAlbumFragment)
+            .show(concreteAlbumFragment)
+            .hide(albumFragment)
             .addToBackStack(null)
             .commit()
 
-        val presenter = ConcreteAlbumPresenter(fragment, repository)
+        val presenter = ConcreteAlbumPresenter(concreteAlbumFragment, repository)
     }
 
-    override fun startPhotoFragment() {
-        val fragment = PhotoFragment()
+    override fun startPhotoFragment(itemId: Int) {
+        val arg = Bundle()
+        arg.putInt("PHOTO_ID", itemId)
+
+        photoFragment.arguments = arg
 
         val repository = PhotoRemoteDataSource()
 
         supportFragmentManager
             .beginTransaction()
-            .replace(com.example.photoviewer.R.id.main_frag, fragment)
+            .add(com.example.photoviewer.R.id.main_frag, photoFragment)
+            .show(photoFragment)
+            .hide(concreteAlbumFragment)
             .addToBackStack(null)
             .commit()
 
-        val presenter = PhotoPresenter(fragment, repository)
+        val presenter = PhotoPresenter(photoFragment, repository)
     }
 
-    override fun onConcreteAlbumClicked(view: View, item: Photo) {
-        val arg: Bundle? = null
-        arg?.putInt("PHOTO_ID", item.id!!)
-        startPhotoFragment()
+    override fun onConcreteAlbumClicked(item: Photo) {
+        item.id?.let { startPhotoFragment(it) }
     }
 
-    override fun onAlbumsClicked(view: View, item: Album) {
-        val arg: Bundle? = null
-        arg?.putInt("ALBUM_ID", item.id!!)
-        startConcreteAlbumFragment()
+    override fun onAlbumsClicked(item: Album) {
+        item.id?.let { startConcreteAlbumFragment(it) }
     }
 }

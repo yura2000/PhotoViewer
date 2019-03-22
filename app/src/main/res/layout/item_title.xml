@@ -14,7 +14,11 @@
             android:layout_marginTop="16dp"
             android:id="@+id/itemTitle_tv"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="4dp"/>
+    <android.support.constraint.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline"/>
     <TextView
             android:text="0"
             android:textSize="20sp"

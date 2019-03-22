@@ -4,5 +4,5 @@ import android.view.View
 import com.example.photoviewer.data.Photo
 
 interface ConcreteAlbumClickListener {
-    fun onConcreteAlbumClicked(view: View, item: Photo)
+    fun onConcreteAlbumClicked(item: Photo)
 }

@@ -33,7 +33,7 @@ class PhotoFragment : Fragment(), PhotoContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         val args = arguments
-        val photoId: Int? = args?.getInt("PHOTO_ID", 0)
+        val photoId: Int? = args?.getInt("PHOTO_ID")
 
         mPresenter?.getPhotos(photoId)
     }

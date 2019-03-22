@@ -17,8 +17,7 @@ class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
 
     private var mPresenter: ConcreteAlbumContract.Presenter? = null
     private lateinit var callback: ConcreteAlbumClickListener
-    val args = arguments
-    val albumId: Int? = args?.getInt("ALBUM_ID", 0)
+    private var mAlbumId: Int? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -27,6 +26,10 @@ class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var args = arguments
+        val albumId = args?.getInt("ID", 0)
+
+        mAlbumId = albumId
     }
 
     override fun onCreateView(
@@ -37,17 +40,18 @@ class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
         return inflater.inflate(com.example.photoviewer.R.layout.concrete_album_fragment, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPresenter?.getPhotos(albumId)
+        mPresenter?.getPhotos(mAlbumId)
     }
 
     override fun showPhotos(photos: List<Photo>?) {
-        var photosRecyclerView = ConcreteAlbumRecyclerAdapter(photos!!)
+        val photosRecyclerView = ConcreteAlbumRecyclerAdapter(photos!!)
         photosRecyclerView.onClickItem = (object : ConcreteAlbumClickListener {
-            override fun onConcreteAlbumClicked(view: View, item: Photo) {
-                callback.onConcreteAlbumClicked(view, item)
+            override fun onConcreteAlbumClicked(item: Photo) {
+                callback.onConcreteAlbumClicked(item)
             }
         })
         val recyclerViewAlbums = concrete_album_recycler_view
@@ -61,5 +65,9 @@ class ConcreteAlbumFragment : Fragment(), ConcreteAlbumContract.View {
 
     override fun showLoadError(resId: String?) {
         Toast.makeText(context, resId, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 }
